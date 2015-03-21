@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Create Profile</title>
+	<title>Create Edit Profile</title>
 	<meta charset="utf-8"> 
 	<link rel="shortcut icon" href="img/icon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
 
 
 		<div data-role="header" style="overflow:hidden;">
-			<h1>Create Profile</h1>
+			<h1>Edit Profile</h1>
 			<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
 			<!-- <a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a> -->
 
@@ -50,8 +50,8 @@
 		<div role="main" class="ui-content">
 			<div id="error"></div>
 
-            <select name="user" id="bgroup" data-theme="a">
-			
+			            <select name="user" id="bgroup" data-theme="a">
+
 				<option value="select">Select Blood Group</option>
 				<option value="A+">A+</option>
 				<option value="A-">A-</option>
@@ -61,13 +61,13 @@
 				<option value="O-">O-</option>
 				<option value="AB+">AB+</option>
 				<option value="AB_">AB-</option>
-			<br/>
-			<input name="text-basic" id="pincode" autocomplete="on" value="" type="number" placeholder="Pincode">
-			<input name="text-basic" id="year" autocomplete="on" value="" type="number" placeholder="year of birth">
-			<br/>
+				<br/>
+				<input name="text-basic" id="pincode" autocomplete="on" value="" type="number" placeholder="Pincode">
+				<input name="text-basic" id="year" autocomplete="on" value="" type="number" placeholder="year of birth">
+				<br/>
 
-			<button class="ui-btn ui-btn-b" onClick="create()">Create</button>
-			<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
+				<button class="ui-btn ui-btn-b" onClick="create()">Edit</button>
+				<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
 
 			</div><!-- /content -->
 
@@ -75,39 +75,63 @@
 
 		<script>
 			check();
+			fill_details();
 			function reset(){
 
-				$('#bgroup').val('select');
+				//$('#bgroup').val('select');
 				$('#pincode').val('');
 				$('#year').val('');
 
 			}
 
-	function check(){
-		hasprofile=localStorage.hasprofile;
-		if(typeof hasprofile != 'undefined' && hasprofile != null){
-			window.location="viewprofile.html"
-		}
-	}
+			function check(){
+				hasprofile=localStorage.hasprofile;
+				if(!(typeof hasprofile != 'undefined' && hasprofile != null)){
+					window.location="front.html"
+				}
+			}
 
-	function create(){
-		email=localStorage.email;
-		pass=localStorage.password;
-		bloodgroup = $('#bgroup').val();
-		year=$('#year').val();
-		pincode=$('#pincode').val();
-		console.log(email);
-		console.log(pass);
-		if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
-			showError("Please Login");
-		} else if(bloodgroup=="select"){
-			showError("Select a bloodgroup");
-		} else if(pincode==""){
-			showError("Enter Pincode");
-			console.log(bloodgroup);
-		} else if(year==""){
-			showError("Enter Year");
-		} else {
+			function fill_details(){
+				email=localStorage.email;
+				pass=localStorage.password;
+				if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
+					showError("Please Login");
+				} else {
+					// spinner.show();
+					$.post(server+'viewprofile.php',{'email':email, 'password':pass},function(data,status){
+						// spinner.hide();
+						if(status=='success'){
+							console.log(data);
+							data = $.parseJSON(data);
+							if(data['status']==0)
+								showError(data['error']);
+							else{
+								bloodgroup=data['donor_info']['bloodgroup'];
+								pincode=data['donor_info']['branch'];
+								year=data['donor_info']['year'];
+                                $('#bgroup').val(bloodgroup);
+                                $('#pincode').val(pincode);
+                                $('#year').val(year);
+							}
+						}else{
+							console.log('failed');
+						}
+					});
+}
+}
+
+function create(){
+	email=localStorage.email;
+	pass=localStorage.password;
+	bloodgroup = $('#bgroup').val();
+	year=$('#year').val();
+	pincode=$('#pincode').val();
+	console.log(email);
+	console.log(pass);
+	if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
+		showError("Please Login");
+	} else {
+		fill_details();
 			// spinner.show();
 			$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':bloodgroup, 'branch':pincode, 'year':year},function(data,status){
 				// spinner.hide();

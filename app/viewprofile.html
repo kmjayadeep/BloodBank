@@ -39,7 +39,6 @@
 	</div>
 	<div data-role="page">
 
-
 		<div data-role="header" style="overflow:hidden;">
 			<h1>My Profile</h1>
 			<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
@@ -49,25 +48,53 @@
 
 		<div role="main" class="ui-content">
 			<div id="error"></div>
-		<label for="text-basic" id="name"></label>
-		<label for="text-basic" id="email"></label>
-		<label for="text-basic" id="bloodgroup"></label>
-		<label for="text-basic" id="pincode"></label>
-		<label for="text-basic" id="mobile"></label>
-		<label for="text-basic" id="year of birth"></label>
+			<label for="text-basic" id="name"></label>
+			<label for="text-basic" id="email"></label>
+			<label for="text-basic" id="bloodgroup"></label>
+			<label for="text-basic" id="pincode"></label>
+			<label for="text-basic" id="mobile"></label>
+			<label for="text-basic" id="year"></label>
 
-<a href="editprofile.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">Edit Profle</a>
+			<a href="editprofile.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">Edit Profile</a>
+			<button type="submit" onclick="deletem()">Delete Profile</button>
 
 		</div><!-- /content -->
+
 
 	</div><!-- /page -->
 
 	<script>
 		check();
-        view();
+		view();
 		function clear(){
 
 		//	$('#loginForm').trigger("reset");
+	}
+
+	function deletem(){
+		email=localStorage.email;
+		pass=localStorage.password;
+		console.log(email);
+		console.log(pass);
+		if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
+			showError("Please Login");
+		}
+		$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':"", 'branch':"", 'year':""},function(data,status){
+				// spinner.hide();
+				if(status=='success'){
+					console.log(data);
+					data = $.parseJSON(data);
+					if(data['status']==0)
+						showError(data['error']);
+					else{
+						localStorage.hasprofile=true;
+						window.location="front.html";
+					}
+				}else{
+					console.log('failed');
+				}
+			});
+		localStorage.clear(hasprofile);
 	}
 
 	function check(){
@@ -82,9 +109,9 @@
 	function view(){
 		email=localStorage.email;
 		pass=localStorage.password;
-        console.log(email);
-        console.log(pass);
-        if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
+		console.log(email);
+		console.log(pass);
+		if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
 			showError("Please Login");
 		} else {
 			// spinner.show();
@@ -114,16 +141,16 @@
 				}
 			});
 
-		}
-	}
+}
+}
 
-	function showError(data){
-		$('#error').slideDown();
-		$('#error').html(data);
-		setTimeout(function(){
-			$('#error').slideUp();
-		},5000);
-	}
+function showError(data){
+	$('#error').slideDown();
+	$('#error').html(data);
+	setTimeout(function(){
+		$('#error').slideUp();
+	},5000);
+}
 
 
 </script>
