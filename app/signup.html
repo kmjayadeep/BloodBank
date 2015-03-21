@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blood Blank</title>
+	<link rel="shortcut icon" href="img/icon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" />
+	<style type="text/css">
+	
+	#spinner{
+		width: 100%;
+		height: 100%;
+		background: none repeat scroll 0% 0% rgba(162, 224, 234, 0.89);
+		position: absolute;
+		z-index: 100;
+		text-align: center;
+		display: none;
+	}
+
+	#error{
+		color:red;
+		display: none;
+		margin-bottom: 1em;
+	}
+
+	</style>
+	<script src="js/var.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div id="spinner">
+<br/><br/>
+<h1>Please Wait...</h1>
+
+</div>
+<div data-role="page">
+
+
+<div data-role="header" style="overflow:hidden;">
+<h1>Blood Bank</h1>
+	<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
+    <a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
+   
+</div><!-- /header -->
+
+<div role="main" class="ui-content">
+<div id="error">
+
+</div>
+
+<label for="text-basic">Email Address</label>
+<input name="text-basic" id="text-basic" value="" type="text">
+
+
+<label for="password">Password</label>
+<input name="password" id="password" value="" autocomplete="off" type="password" >
+<label for="password">Confirm Password</label>
+<input name="password" id="password" value="" autocomplete="off" type="password" >
+
+
+
+<br/>
+	
+<button class="ui-btn ui-btn-b" onClick="login()">Login</button>
+<button class="ui-btn ui-btn-a" onClick="clear()">Clear</button>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<script>
+		
+		email = $('#text-basic');
+		pass = $('#password');
+		spinner = $('#spinner');
+
+		if(!localStorage.loggedIn){
+		$('#btnLogin').html('Login');
+
+		}else{
+			$('#btnLogin').html('Logout');
+		}
+
+
+		function clear(){
+
+		//	$('#loginForm').trigger("reset");
+		}
+
+		function login(){
+			e = email.val();
+			p = pass.val();	
+
+			spinner.show();
+			$.post(server+'login.php',{'email':e,'password':p},function(data,status){
+					spinner.hide();
+					if(status=='success'){
+						data = $.parseJSON(data);
+						if(data['status']==0)
+							showError(data['error']);
+						else{
+							localStorage.loggedIn = 1;
+							localStorage.email = data['email'];
+							localStorage.password = data['password'];
+							window.location="front.html";
+						}
+					}else{
+						console.log('failed');
+					}
+			});
+
+
+		}
+
+		function showError(data){
+			$('#error').slideDown();
+			$('#error').html(data);
+			setTimeout(function(){
+				$('#error').slideUp();
+			},5000);
+		}
+
+
+</script>
+
+</body>
+
+
+</html>
