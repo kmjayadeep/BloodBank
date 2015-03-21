@@ -18,6 +18,12 @@
 		display: none;
 	}
 
+	#error{
+		color:red;
+		display: none;
+		margin-bottom: 1em;
+	}
+
 	</style>
 	<script src="js/var.js"></script>
 	<script src="js/jquery.min.js"></script>
@@ -37,7 +43,9 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
+<div id="error">
 
+</div>
 
 <label for="text-basic">Email Address</label>
 <input name="text-basic" id="text-basic" value="" type="text">
@@ -47,6 +55,7 @@
 <input name="password" id="password" value="" autocomplete="off" type="password" >
 
 
+
 <br/>
 	
 <button class="ui-btn ui-btn-b" onClick="login()">Login</button>
@@ -54,14 +63,13 @@
 
 	</div><!-- /content -->
 
-
-
 </div><!-- /page -->
 
 <script>
 		
 		email = $('#text-basic');
 		pass = $('#password');
+		spinner = $('#spinner');
 
 		function clear(){
 
@@ -72,13 +80,34 @@
 			e = email.val();
 			p = pass.val();	
 
-			$.post(server+'login.php',{'email':e,'password':p},function(status,data){
-					alert(status+data);
+			spinner.show();
+			$.post(server+'login.php',{'email':e,'password':p},function(data,status){
+					spinner.hide();
+					if(status=='success'){
+						data = $.parseJSON(data);
+						if(data['status']==0)
+							showError(data['error']);
+						else{
+							localStorage.loggedIn = 1;
+							localStorage.email = data['email'];
+							localStorage.password = data['password'];
+							window.location="front.html";
+						}
+					}else{
+						console.log('failed');
+					}
 			});
 
 
 		}
 
+		function showError(data){
+			$('#error').slideDown();
+			$('#error').html(data);
+			setTimeout(function(){
+				$('#error').slideUp();
+			},5000);
+		}
 
 
 </script>
