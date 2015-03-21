@@ -1,4 +1,6 @@
 <?PHP
+$email = $_REQUEST['email'];
+$pass = md5($_REQUEST['password']);
 $mode=0;
 if (isset($_REQUEST['bloodgroup'])) {
     $bloodgroup=$_REQUEST['bloodgroup'];
@@ -18,13 +20,13 @@ $json = array();
 $json['status']=0;
 if ($db_found) {
 	if($mode==0)
-	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename ";
+	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE email='$email' and password='$pass' ";
     elseif($mode==1)
-	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE bloodgroup='$bloodgroup'";
+	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE email='$email' and password='$pass' and  bloodgroup='$bloodgroup'";
     elseif($mode==2)
-	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch='$branch'";
+	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE email='$email' and password='$pass' and branch='$branch'";
     elseif($mode==3)
-	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch='$branch' and bloodgroup='$bloodgroup'";
+	    $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE email='$email' and password='$pass' and branch='$branch' and bloodgroup='$bloodgroup'";
     $result = mysql_query($SQL) or die($json['error']=mysql_error());
     $num_rows = mysql_num_rows($result);
     if ($num_rows) {
