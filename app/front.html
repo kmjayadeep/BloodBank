@@ -2,16 +2,20 @@
 <html>
 <head>
 	<title>Blood Blank</title>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
 	<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" />
 
 	<style type="text/css">
 
-		ul.mylinks{
-			list-style-type: none;
-		}
-		
+
+	.mybtn{
+		padding: 2em;
+	}
+
+
+
 	</style>
 
 	<script src="js/jquery.min.js"></script>
@@ -29,24 +33,43 @@
    
 </div><!-- /header -->
 
-	<div role="main" class="ui-content">
+	<div role="main" class="ui-content" style="">
+
+<a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-a mybtn" data-transition="pop">Search Donors</a>
+<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+
+<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>    
+
+    <div style="padding:10px 20px;">
+            <h3>Search Donors</h3>
+
+            <select name="user" id="sgroup" data-theme="a">
+
+				<option value="All">All</option>
+				<option value="A+">A+</option>
+				<option value="A-">A-</option>
+				<option value="B+">B+</option>
+				<option value="B-">B-</option>
+				<option value="O+">O+</option>
+				<option value="O-">O-</option>
+				<option value="AB+">AB+</option>
+				<option value="AB_">AB-</option>
+			</select>
 
 
+            <input type="number" name="pass" id="ipin" value="" placeholder="Pincode" data-theme="a">
+            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-search" onclick="search()">Search</button>
+        </div>
+</div>
 
-<ul class="mylinks">
-    <li><a href="#">Search Donors</a></li>
-    <li><a href="#">My Profile</a></li>
-    <li><a href="#">About</a></li>
-</ul>
-
+<a href="profile.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">Profile</a>
+<a href="about.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">About</a>
 
 
 	</div><!-- /content -->
 
-	<div data-role="footer">
-		<h4>Page Footer</h4>
-	</div><!-- /footer -->
 </div><!-- /page -->
+
 
 <script>
 		
@@ -55,6 +78,15 @@
 
 	}else{
 		$('#btnLogin').html('Logout');
+	}
+
+	function search(){
+		group = $('#sgroup').val();
+		pin = $('#ipin').val();
+
+		localStorage.searchGroup = group;
+		localStorage.searchPin = pin;
+		//window.location = 'search.html';
 	}
 
 </script>
