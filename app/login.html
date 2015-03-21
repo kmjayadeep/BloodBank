@@ -52,18 +52,18 @@
 </div>
 
 <label for="text-basic">Email Address</label>
-<input name="text-basic" id="text-basic" value="" type="text">
+<input name="text-basic" id="text-basic"  type="text">
 
 
 <label for="password">Password</label>
-<input name="password" id="password" value="" autocomplete="off" type="password" >
+<input name="password" id="password" autocomplete="off" type="password" >
 
 
 
 <br/>
 	
 <button class="ui-btn ui-btn-b" onClick="login()">Login</button>
-<button class="ui-btn ui-btn-a" onClick="clear()">Clear</button>
+<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
 
 	</div><!-- /content -->
 
@@ -84,9 +84,10 @@
 		}
 
 
-		function clear(){
+		function reset(){
 
-		//	$('#loginForm').trigger("reset");
+			email.val('');
+			pass.val('');
 		}
 
 		function login(){

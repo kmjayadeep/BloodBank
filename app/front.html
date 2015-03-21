@@ -62,7 +62,7 @@
         </div>
 </div>
 
-<a href="profile.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">Profile</a>
+<a href="profile.html" data-ajax="false" id="btprofile" class="ui-btn ui-btn-a mybtn">Profile</a>
 <a href="about.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">About</a>
 
 
@@ -75,6 +75,8 @@
 		
 	if(!localStorage.loggedIn){
 		$('#btnLogin').html('Login');
+		$('#btprofile').hide();
+
 
 	}else{
 		$('#btnLogin').html('Logout');

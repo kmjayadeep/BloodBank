@@ -52,7 +52,7 @@
 
             <select name="user" id="bgroup" data-theme="a">
 			
-				<option value="select">Select BG</option>
+				<option value="select">Select Blood Group</option>
 				<option value="A+">A+</option>
 				<option value="A-">A-</option>
 				<option value="B+">B+</option>
@@ -67,7 +67,7 @@
 			<br/>
 
 			<button class="ui-btn ui-btn-b" onClick="create()">Create</button>
-			<button class="ui-btn ui-btn-a" onClick="clear()">Clear</button>
+			<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
 
 			</div><!-- /content -->
 
@@ -75,10 +75,13 @@
 
 		<script>
 			check();
-			function clear(){
+			function reset(){
 
-		//	$('#loginForm').trigger("reset");
-	}
+				//$('#bgroup').val('select');
+				$('#pincode').val('');
+				$('#year').val('');
+
+			}
 
 	function check(){
 		hasprofile=localStorage.hasprofile;

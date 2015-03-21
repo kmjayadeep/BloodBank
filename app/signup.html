@@ -71,7 +71,7 @@
 			<br/>
 
 			<button class="ui-btn ui-btn-b" onClick="signup()">Signup</button>
-			<button class="ui-btn ui-btn-a" onClick="clear()">Clear</button>
+			<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
 
 		</div><!-- /content -->
 
@@ -92,10 +92,12 @@
 		// 	$('#btnLogin').html('Login');
 		// }
 
+		function reset(){
 
-		function clear(){
+			$.each($('input'),function(k,v){
+				$(v).val('');
+			});
 
-		//	$('#loginForm').trigger("reset");
 	}
 
 	function signup(){
