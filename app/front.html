@@ -83,7 +83,8 @@
 	function search(){
 		group = $('#sgroup').val();
 		pin = $('#ipin').val();
-
+        if(pin=="")
+        	pin="All";
 		localStorage.searchGroup = group;
 		localStorage.searchPin = pin;
 		window.location = 'search.html';
