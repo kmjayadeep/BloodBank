@@ -1,0 +1,13 @@
+{
+  "name": "Blood Bank",
+  "description": "An app for sharing blood group",
+  "launch_path": "/index.html",
+  "icons": {
+    "512": "/img/icon.png"
+  },
+  "developer": {
+    "name": "Jayadeep KM, Nisham Mohammed",
+    "url": "http://bloodbank.com"
+  },
+  "default_locale": "en"
+}
