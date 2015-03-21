@@ -1,7 +1,6 @@
 <?PHP
 $email = $_REQUEST['email'];
-$pass = md5($_REQUEST['password']);
-$bloodgroup = $_REQUEST['bloodgroup'];
+$pass = $_REQUEST['password'];
 $bloodgroup = $_REQUEST['bloodgroup'];
 $branch = $_REQUEST['branch'];
 $dt=0;
