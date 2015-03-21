@@ -35,5 +35,7 @@ if ($db_found) {
 			$json['error']=mysql_error();
 		}
 	}
+} else {
+        $json['error']="Database not found";
 }
 echo json_encode($json);

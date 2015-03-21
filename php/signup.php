@@ -20,7 +20,7 @@ if ($db_found) {
             $message= "success";
         } else {
             $error=mysql_error();
-            if ((strpos($error,"SQL syntax")))
+            if ((strpos($error, "SQL syntax")))
                 $json['error']="Syntax Error";
             else
                 $json['error']=$error;
@@ -33,9 +33,6 @@ if ($db_found) {
             $json['error']="Duplicate Entry for Mobile";
         // $json['error']=$error;
     }
-
-// mysql_close($db_handle);
-// print $message;
 } else {
         $json['error']="Databse not found";
 }
