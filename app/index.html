@@ -17,6 +17,17 @@
 		.img1{
 			width: 100%;
 		}
+		#loader{
+			width: 80%;
+			height: 1em;
+			background-color: #E9B0B0;
+			margin:auto;
+		}
+		#loading{
+			width: 0%;
+			height: 100%;
+			background-color: #f00;
+		}
 
 	</style>
 
@@ -31,16 +42,41 @@
 <img src="img/drop.jpg" class="img1">
 
 
+<div id="loader">
+	<div id="loading">
+</div>
 
 
 </div><!-- /page -->
 
 
 <script>
-	
-	setTimeout(function(){
-		console.log('gg');
-	},2000);
+
+	var loading = $('#loading');
+
+	i=10;
+
+	function load(){		
+
+			if(i>100)
+				window.location="front.html";
+			else{
+				loading.width(i+'%');
+				i+=10;
+			}
+	}
+
+
+	setInterval(function(){
+		load();
+	},200)
+
+	load();
+
+
+	//setTimeout(function(){
+		//window.location="front.html";
+	//},2000);
 
 </script>
 
