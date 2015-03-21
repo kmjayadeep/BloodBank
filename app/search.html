@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blood Blank</title>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="img/icon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" />
+	<style type="text/css">
+	
+	#spinner{
+		width: 100%;
+		height: 100%;
+		background: none repeat scroll 0% 0% rgba(162, 224, 234, 0.89);
+		position: absolute;
+		z-index: 100;
+		text-align: center;
+	}
+
+	#error{
+		color:red;
+		display: none;
+		margin-bottom: 1em;
+	}
+
+	.blood{
+		color: red;
+		float:right;
+	}
+	.expand{
+		background-color: #2a2a2a;
+		padding: 10px;
+		display: none;
+	}
+
+	</style>
+	<script src="js/var.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div id="spinner">
+<br/><br/>
+<h1>Please Wait...</h1>
+
+</div>
+<div data-role="page" id="i">
+
+
+<div data-role="header" style="overflow:hidden;">
+<h1>Blood Bank</h1>
+	<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
+    <a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
+   
+</div><!-- /header -->
+
+<div role="main" class="ui-content">
+
+<div id="error">
+
+</div>
+
+
+<div id="cards">
+
+<!--
+    <h4 class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-left" data-exp="mnisham" onClick="expand('mnisham')">Nisham <span class="blood">A+</span></h4>
+
+	<div class="expand" data-expand="mnisham">
+	<a href="mailto:dssd@s.com" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-mail ui-btn-icon-left">a@a.com</a>
+	<a href="phone:8989584" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-phone ui-btn-icon-left">434</a>
+	</div>
+-->
+
+</div>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<script>
+		
+		spinner = $('#spinner');
+
+
+		//localStorage.clear();
+
+		if(!localStorage.loggedIn){
+			$('#btnLogin').html('Login');
+
+		}else{
+			$('#btnLogin').html('Logout');
+		}
+
+		sgroup = localStorage.searchGroup;
+		spin = localStorage.searchPin;
+
+		$.post(server+'listdonors.php',{'bloodgroup':sgroup,'branch':spin},function(data,status){
+				spinner.hide();
+				if(status=='success'){
+					data = $.parseJSON(data);
+					if(data['status']==0){
+						showError('Sorry. There are no contents to display')
+					}else{
+						donors = data['donor_info'];
+
+
+					//d = '<h4 class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-left" data-exp="mnisham" onClick="expand(\'mnisham\')">Nisham <span class="blood">A+</span></h4><div class="expand" data-expand="mnisham"><a href="mailto:dssd@s.com" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-mail ui-btn-icon-left">a@a.com</a><a href="phone:8989584" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-phone ui-btn-icon-left">434</a></div>';
+				//	$('#cards').append(d);
+
+						$.each(donors,function(key,val){
+							console.log(val);
+
+
+					d = '<h4 class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-left" onClick="expand(\''+val['mobile']+'\')">'+val['name']+'<span class="blood">'+val['bloodgroup']+'</span></h4><div class="expand" data-expand="'+val['mobile']+'"><a href="mailto:'+val['email']+'" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-mail ui-btn-icon-left">'+val['email']+'</a><a href="phone:'+val['mobile']+'" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-phone ui-btn-icon-left">'+val['mobile']+'</a></div>';
+
+
+///							console.log(d);
+
+							$('#cards').append(d);
+						});
+						
+					}
+				}else{
+					showError('Connection Error. Please try again');
+				}
+		});
+
+		function showError(data){
+			$('#error').html(data);
+			$('#error').slideDown();
+		}
+
+		//$('[data-exp]').click(function(){
+		//	exp = $(this).data('exp');
+
+		//	expand = $('[data-expand='+exp+']');
+			//expand.slideToggle();
+	//	});
+		function expand(exp){
+			e = $('[data-expand='+exp+']');
+			e.slideToggle();
+		}
+
+</script>
+
+</body>
+
+
+</html>
