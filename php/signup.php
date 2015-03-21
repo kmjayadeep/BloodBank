@@ -34,6 +34,6 @@ if ($db_found) {
         // $json['error']=$error;
     }
 } else {
-        $json['error']="Databse not found";
+        $json['error']="Database not found";
 }
 echo json_encode($json);
