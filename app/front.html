@@ -12,9 +12,13 @@
 
 <div data-role="page">
 
-	<div data-role="header">
-		<h1>Blood Bank</h1>
-	</div><!-- /header -->
+
+<div data-role="header" style="overflow:hidden;">
+<h1>Blood Bank</h1>
+	<a href="front.html" data-icon="home" class="ui-btn-left">Home</a>
+    <a href="login.html" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
+   
+</div><!-- /header -->
 
 	<div role="main" class="ui-content">
 		<p>Page content goes here.</p>
@@ -25,6 +29,16 @@
 	</div><!-- /footer -->
 </div><!-- /page -->
 
+<script>
+		
+	if(!localStorage.loggedIn){
+		$('#btnLogin').html('Login');
+
+	}else{
+		$('#btnLogin').html('Logout');
+	}
+
+</script>
 
 
 </body>
