@@ -42,7 +42,7 @@
 <div data-role="header" style="overflow:hidden;">
 <h1>Blood Bank</h1>
 	<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
-    <a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
+    <a href="signup.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
    
 </div><!-- /header -->
 
@@ -75,11 +75,12 @@
 		pass = $('#password');
 		spinner = $('#spinner');
 
-		if(!localStorage.loggedIn){
-		$('#btnLogin').html('Login');
+		if(localStorage.loggedIn){
+			localStorage.clear();
+			window.location = 'front.html';
 
 		}else{
-			$('#btnLogin').html('Logout');
+			$('#btnLogin').html('Signup');
 		}
 
 
