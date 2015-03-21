@@ -43,7 +43,7 @@
 		<div data-role="header" style="overflow:hidden;">
 			<h1>Blood Bank</h1>
 			<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
-			<a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
+			<a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin">Login</a>
 
 		</div><!-- /header -->
 
@@ -86,11 +86,11 @@
 		confpass = $('#confpassword');
 		spinner = $('#spinner');
 
-		if(!localStorage.loggedIn){
-			$('#btnLogin').html('login');
-		}else{
-			$('#btnLogin').html('Logout');
-		}
+		// if(!localStorage.loggedIn){
+		// 	$('#btnLogin').html('login');
+		// }else{
+		// 	$('#btnLogin').html('Login');
+		// }
 
 
 		function clear(){
