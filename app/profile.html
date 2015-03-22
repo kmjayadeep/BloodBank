@@ -83,6 +83,8 @@
 
 			}
 
+			spinner = $('#spinner');
+
 	function check(){
 		hasprofile=localStorage.hasprofile;
 		if(typeof hasprofile != 'undefined' && hasprofile != null){
@@ -108,9 +110,9 @@
 		} else if(year==""){
 			showError("Enter Year");
 		} else {
-			// spinner.show();
+			 spinner.show();
 			$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':bloodgroup, 'branch':pincode, 'year':year},function(data,status){
-				// spinner.hide();
+				 spinner.hide();
 				if(status=='success'){
 					console.log(data);
 					data = $.parseJSON(data);

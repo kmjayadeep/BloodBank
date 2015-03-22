@@ -67,6 +67,7 @@
 		check();
 		view();
 
+			spinner = $('#spinner');
 	function deletem(){
 		email=localStorage.email;
 		pass=localStorage.password;
@@ -75,8 +76,9 @@
 		if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
 			showError("Please Login");
 		}
+		spinner.show();
 		$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':"", 'branch':"", 'year':""},function(data,status){
-				// spinner.hide();
+				 spinner.hide();
 				if(status=='success'){
 					console.log(data);
 					data = $.parseJSON(data);
