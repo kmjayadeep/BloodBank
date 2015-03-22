@@ -84,7 +84,6 @@
 
 			}
 			
-			spinner = $('#spinner');
 
 			function check(){
 				hasprofile=localStorage.hasprofile;
@@ -94,14 +93,15 @@
 			}
 
 			function fill_details(){
+			spin = $('#spinner');
 				email=localStorage.email;
 				pass=localStorage.password;
 				if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
 					showError("Please Login");
 				} else {
-					 spinner.show();
+					 spin.show();
 					$.post(server+'viewprofile.php',{'email':email, 'password':pass},function(data,status){
-						 spinner.hide();
+						 spin.hide();
 						if(status=='success'){
 							console.log(data);
 							data = $.parseJSON(data);
@@ -119,10 +119,11 @@
 							console.log('failed');
 						}
 					});
-}
-}
+			}
+		}
 
 function create(){
+			spin = $('#spinner');
 	email=localStorage.email;
 	pass=localStorage.password;
 	bloodgroup = $('#bgroup').val();
@@ -134,9 +135,9 @@ function create(){
 		showError("Please Login");
 	} else {
 		fill_details();
-			// spinner.show();
+			 spin.show();
 			$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':bloodgroup, 'branch':pincode, 'year':year},function(data,status){
-				// spinner.hide();
+				 spin.hide();
 				if(status=='success'){
 					console.log(data);
 					data = $.parseJSON(data);

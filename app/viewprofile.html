@@ -112,9 +112,9 @@
 		if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
 			showError("Please Login");
 		} else {
-			// spinner.show();
+			 spinner.show();
 			$.post(server+'viewprofile.php',{'email':email, 'password':pass},function(data,status){
-				// spinner.hide();
+				 spinner.hide();
 				if(status=='success'){
 					console.log(data);
 					data = $.parseJSON(data);
