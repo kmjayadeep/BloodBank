@@ -29,11 +29,11 @@ if ($db_found) {
     if($mode==0)
         $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE bloodgroup is not null";
     elseif($mode==1)
-        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE bloodgroup LIKE '$bloodgroup'";
+        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE bloodgroup LIKE '$bloodgroup'%";
     elseif($mode==2)
-        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '$branch'";
+        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '$branch'%";
     elseif($mode==3)
-        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '$branch' and bloodgroup LIKE '$bloodgroup'";
+        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '$branch'% and bloodgroup LIKE '$bloodgroup'%";
     $result = mysql_query($SQL) or die($json['error']=mysql_error());
     $num_rows = mysql_num_rows($result);
     if ($num_rows) {
