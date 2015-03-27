@@ -106,10 +106,6 @@
 					}else{
 						donors = data['donor_info'];
 
-
-					//d = '<h4 class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-left" data-exp="mnisham" onClick="expand(\'mnisham\')">Nisham <span class="blood">A+</span></h4><div class="expand" data-expand="mnisham"><a href="mailto:dssd@s.com" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-mail ui-btn-icon-left">a@a.com</a><a href="phone:8989584" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-phone ui-btn-icon-left">434</a></div>';
-				//	$('#cards').append(d);
-
 						$.each(donors,function(key,val){
 							console.log(val);
 
@@ -132,13 +128,6 @@
 			$('#error').html(data);
 			$('#error').slideDown();
 		}
-
-		//$('[data-exp]').click(function(){
-		//	exp = $(this).data('exp');
-
-		//	expand = $('[data-expand='+exp+']');
-			//expand.slideToggle();
-	//	});
 		function expand(exp){
 			e = $('[data-expand='+exp+']');
 			e.slideToggle();

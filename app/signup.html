@@ -52,27 +52,14 @@
 
 			</div>
 
-			<!-- <label for="text-basic">Full Name</label> -->
 			<input name="text-basic" id="fname" autocomplete="on" value="" type="text" placeholder="Full Name">
-			<!-- <input name="text-basic" id="name" autocomplete="on" value="" type="email"> -->
-			
-			<!-- <label for="text-basic">Mobile</label> -->
 			<input name="text-basic" id="mobile" autocomplete="on" value="" type="number" placeholder="Mobile">
-
-			<!-- <label for="text-basic">Email Address</label> -->
 			<input name="text-basic" id="email" autocomplete="on" value="" type="text" placeholder="Email Address">
-
-
-			<!-- <label for="password">Password</label> -->
 			<input name="password" id="password" value="" autocomplete="off" type="password" placeholder="Password">
-			<!-- <label for="password">Confirm Password</label> -->
 			<input name="password" id="confpassword" value="" autocomplete="off" type="password" placeholder="Confirm Password">
-
 			<br/>
-
 			<button class="ui-btn ui-btn-b" onClick="signup()">Signup</button>
 			<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
-
 		</div><!-- /content -->
 
 	</div><!-- /page -->
@@ -86,59 +73,53 @@
 		confpass = $('#confpassword');
 		spinner = $('#spinner');
 
-		// if(!localStorage.loggedIn){
-		// 	$('#btnLogin').html('login');
-		// }else{
-		// 	$('#btnLogin').html('Login');
-		// }
-
 		function reset(){
 
 			$.each($('input'),function(k,v){
 				$(v).val('');
 			});
 
-	}
-
-	function signup(){
-		val_email = email.val();
-		val_pass = pass.val();	
-		val_confpass = confpass.val();	
-		val_mobile=mobile.val();
-		val_name=fname.val();
-		if(val_confpass!=val_pass){
-			showError("Passwords don't match")
-		} else {
-			spinner.show();
-			$.post(server+'signup.php',{'name':val_name, 'email':val_email,'password':val_pass, 'mobile':val_mobile},function(data,status){
-				spinner.hide();
-				if(status=='success'){
-					data = $.parseJSON(data);
-					if(data['status']==0)
-						showError(data['error']);
-					else{
-						localStorage.email = data['email'];
-						localStorage.password = data['password'];
-						window.location="front.html";
-					}
-				}else{
-					console.log('failed');
-				}
-			});
-
 		}
-	}
 
-	function showError(data){
-		$('#error').slideDown();
-		$('#error').html(data);
-		setTimeout(function(){
-			$('#error').slideUp();
-		},5000);
-	}
+		function signup(){
+			val_email = email.val();
+			val_pass = pass.val();	
+			val_confpass = confpass.val();	
+			val_mobile=mobile.val();
+			val_name=fname.val();
+			if(val_confpass!=val_pass){
+				showError("Passwords don't match")
+			} else {
+				spinner.show();
+				$.post(server+'signup.php',{'name':val_name, 'email':val_email,'password':val_pass, 'mobile':val_mobile},function(data,status){
+					spinner.hide();
+					if(status=='success'){
+						data = $.parseJSON(data);
+						if(data['status']==0)
+							showError(data['error']);
+						else{
+							localStorage.email = data['email'];
+							localStorage.password = data['password'];
+							window.location="front.html";
+						}
+					}else{
+						console.log('failed');
+					}
+				});
+
+			}
+		}
+
+		function showError(data){
+			$('#error').slideDown();
+			$('#error').html(data);
+			setTimeout(function(){
+				$('#error').slideUp();
+			},5000);
+		}
 
 
-</script>
+	</script>
 
 </body>
 
