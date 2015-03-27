@@ -50,8 +50,8 @@
 		<div role="main" class="ui-content">
 			<div id="error"></div>
 
-            <select name="user" id="bgroup" data-theme="a">
-			
+			            <select name="user" id="bgroup" data-theme="a">
+
 				<option value="select">Select Blood Group</option>
 				<option value="A+">A+</option>
 				<option value="A-">A-</option>
@@ -61,13 +61,13 @@
 				<option value="O-">O-</option>
 				<option value="AB+">AB+</option>
 				<option value="AB_">AB-</option>
-			<br/>
-			<input name="text-basic" id="pincode" autocomplete="on" value="" type="number" placeholder="Pincode">
-			<input name="text-basic" id="year" autocomplete="on" value="" type="number" placeholder="year of birth">
-			<br/>
+				<br/>
+				<input name="text-basic" id="pincode" autocomplete="on" value="" type="number" placeholder="Pincode">
+				<input name="text-basic" id="year" autocomplete="on" value="" type="number" placeholder="year of birth">
+				<br/>
 
-			<button class="ui-btn ui-btn-b" onClick="create()">Create</button>
-			<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
+				<button class="ui-btn ui-btn-b" onClick="create()">Create</button>
+				<button class="ui-btn ui-btn-a" onClick="reset()">Clear</button>
 
 			</div><!-- /content -->
 
@@ -85,63 +85,79 @@
 
 			spinner = $('#spinner');
 
-	function check(){
-		hasprofile=localStorage.hasprofile;
-		if(typeof hasprofile != 'undefined' && hasprofile != null){
-			window.location="viewprofile.html"
-		}
-	}
-
-	function create(){
-		email=localStorage.email;
-		pass=localStorage.password;
-		bloodgroup = $('#bgroup').val();
-		year=$('#year').val();
-		pincode=$('#pincode').val();
-		console.log(email);
-		console.log(pass);
-		if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
-			showError("Please Login");
-		} else if(bloodgroup=="select"){
-			showError("Select a bloodgroup");
-		} else if(pincode==""){
-			showError("Enter Pincode");
-			console.log(bloodgroup);
-		} else if(year==""){
-			showError("Enter Year");
-		} else {
-			 spinner.show();
-			$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':bloodgroup, 'branch':pincode, 'year':year},function(data,status){
-				 spinner.hide();
-				if(status=='success'){
-					console.log(data);
-					data = $.parseJSON(data);
-					if(data['status']==0)
-						showError(data['error']);
-					else{
-						localStorage.hasprofile=true;
-						window.location="front.html";
-					}
+			function check(){
+				spinner.show();
+				email=localStorage.email;
+				pass=localStorage.password;
+				if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
+					showError("Please Login");
+				}
+				hasprofile=localStorage.hasprofile;
+				if((typeof hasprofile != 'undefined' && hasprofile != null)){
+					window.location="viewprofile.html";
+				}
+				$.post(server+'viewprofile.php',{'email':email, 'password':pass},function(data,status){
+					spinner.hide();
+					if(data['success']==0)
+						showError("Please Login");
 				}else{
-					console.log('failed');
+					bloodgroup=data['donor_info']['bloodgroup'];
+					if(bloodgroup!=null)
+						window.location="viewprofile.html";
 				}
 			});
+			}
 
-		}
-	}
+			function create(){
+				email=localStorage.email;
+				pass=localStorage.password;
+				bloodgroup = $('#bgroup').val();
+				year=$('#year').val();
+				pincode=$('#pincode').val();
+				console.log(email);
+				console.log(pass);
+				if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
+					showError("Please Login");
+				} else if(bloodgroup=="select"){
+					showError("Select a bloodgroup");
+				} else if(pincode==""){
+					showError("Enter Pincode");
+					console.log(bloodgroup);
+				} else if(year==""){
+					showError("Enter Year");
+				} else {
+					spinner.show();
+					$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':bloodgroup, 'branch':pincode, 'year':year},function(data,status){
+						spinner.hide();
+						if(status=='success'){
+							console.log(data);
+							data = $.parseJSON(data);
+							if(data['status']==0)
+								showError(data['error']);
+							else{
+								localStorage.hasprofile=true;
+								window.location="front.html";
+							}
+						}else{
+							console.log('failed');
+						}
+					});
 
-	function showError(data){
-		$('#error').slideDown();
-		$('#error').html(data);
-		setTimeout(function(){
-			$('#error').slideUp();
-		},5000);
-	}
+				}
+			}
+
+			function showError(data){
+				$('#error').slideDown();
+				$('#error').html(data);
+				setTimeout(function(){
+					$('#error').slideUp();
+				},5000);
+			}
 
 
-</script>
+		</script>
 
-</body>
+	</body>
 
 
-</html>
+	</html>
