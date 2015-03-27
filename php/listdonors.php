@@ -46,5 +46,6 @@ if ($db_found) {
 } else {
         $json['error']="Database not found";
 }
+shuffle($json('donor_info'));
 echo json_encode($json);
 mysql_close($db_handle);
