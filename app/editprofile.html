@@ -62,8 +62,8 @@
 				<option value="AB+">AB+</option>
 				<option value="AB_">AB-</option>
 				<br/>
-				<input name="text-basic" id="pincode" autocomplete="on" value="" type="number" placeholder="Pincode">
-				<input name="text-basic" id="year" autocomplete="on" value="" type="number" placeholder="year of birth">
+				<input name="text-basic" id="branch" autocomplete="on" value="" type="text" placeholder="branch">
+				<input name="text-basic" id="year" autocomplete="on" value="" type="number" placeholder="year of admission">
 				<br/>
 
 				<button class="ui-btn ui-btn-b" onClick="create()">Edit</button>
@@ -79,13 +79,14 @@
 			function reset(){
 
 				//$('#bgroup').val('select');
-				$('#pincode').val('');
+				$('#branch').val('');
 				$('#year').val('');
 
 			}
 			
 
 			function check(){
+				return;
 				hasprofile=localStorage.hasprofile;
 				if(!(typeof hasprofile != 'undefined' && hasprofile != null)){
 					window.location="front.html"
@@ -109,10 +110,10 @@
 								showError(data['error']);
 							else{
 								bloodgroup=data['donor_info']['bloodgroup'];
-								pincode=data['donor_info']['branch'];
+								branch=data['donor_info']['branch'];
 								year=data['donor_info']['year'];
                                 $('#bgroup').val(bloodgroup);
-                                $('#pincode').val(pincode);
+                                $('#branch').val(branch);
                                 $('#year').val(year);
 							}
 						}else{
@@ -128,7 +129,7 @@ function create(){
 	pass=localStorage.password;
 	bloodgroup = $('#bgroup').val();
 	year=$('#year').val();
-	pincode=$('#pincode').val();
+	branch=$('#branch').val();
 	console.log(email);
 	console.log(pass);
 	if(typeof email == 'undefined' || email == null || pass == 'undefined' || pass == null){
@@ -136,7 +137,7 @@ function create(){
 	} else {
 		fill_details();
 			 spin.show();
-			$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':bloodgroup, 'branch':pincode, 'year':year},function(data,status){
+			$.post(server+'createprofile.php',{'email':email, 'password':pass, 'bloodgroup':bloodgroup, 'branch':branch, 'year':year},function(data,status){
 				 spin.hide();
 				if(status=='success'){
 					console.log(data);

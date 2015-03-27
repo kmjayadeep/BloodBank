@@ -55,12 +55,10 @@ if ($db_found) {
 } else {
 	$json['error'] = "Database not found";
 }
-<<<<<<< HEAD
 shuffle($json('donor_info'));
 =======
 
 $json['donor_info'] = array_slice($json['donor_info'], 0, $length);
 shuffle($json['donor_info']);
->>>>>>> d75b01654654313e081831dc835ad79b2a2f6f52
-echo json_encode($json);
+\echo json_encode($json);
 mysql_close($db_handle);

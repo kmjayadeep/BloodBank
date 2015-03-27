@@ -25,7 +25,7 @@
 		<h1>Blood Bank</h1>
 		<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
 		<a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
-		
+
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content" style="">
@@ -52,7 +52,7 @@
 				</select>
 
 
-				            <input type="number" name="pass" id="ipin" value="" placeholder="Pincode" data-theme="a">
+				            <input type="text" name="pass" id="ipin" value="" placeholder="branch" data-theme="a">
 				            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-search" onclick="search()">Search</button>
 			        </div>
 		</div>
@@ -67,7 +67,7 @@
 
 
 <script>
-	
+
 	if(!localStorage.loggedIn){
 		$('#btnLogin').html('Login');
 		$('#btprofile').hide();

@@ -51,7 +51,7 @@
 			<label for="text-basic" id="name"></label>
 			<label for="text-basic" id="email"></label>
 			<label for="text-basic" id="bloodgroup"></label>
-			<label for="text-basic" id="pincode"></label>
+			<label for="text-basic" id="branch"></label>
 			<label for="text-basic" id="mobile"></label>
 			<label for="text-basic" id="year"></label>
 
@@ -96,6 +96,7 @@
 	}
 
 	function check(){
+		return;
 		hasprofile=localStorage.hasprofile;
 		console.log(hasprofile);
 		if(typeof hasprofile=='undefined' || hasprofile==null){
@@ -125,13 +126,13 @@
 						name=data['donor_info']['name'];
 						email=data['donor_info']['email'];
 						bloodgroup=data['donor_info']['bloodgroup'];
-						pincode=data['donor_info']['branch'];
+						branch=data['donor_info']['branch'];
 						mobile=data['donor_info']['mobile'];
 						year=data['donor_info']['year'];
 						document.getElementById('name').innerHTML = "name : "+name;
 						document.getElementById('email').innerHTML = "email : "+email;
 						document.getElementById('bloodgroup').innerHTML = "bloodgroup : "+bloodgroup;
-						document.getElementById('pincode').innerHTML = "pincode : "+pincode;
+						document.getElementById('branch').innerHTML = "branch : "+branch;
 						document.getElementById('mobile').innerHTML = "mobile : "+mobile;
 						document.getElementById('year').innerHTML = "year : "+year;
 					}
