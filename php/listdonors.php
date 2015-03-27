@@ -27,7 +27,7 @@ $json = array();
 $json['status']=0;
 if ($db_found) {
     if($mode==0)
-        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE 1";
+        $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE bloodgroup not null";
     elseif($mode==1)
         $SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE bloodgroup LIKE '$bloodgroup'";
     elseif($mode==2)
