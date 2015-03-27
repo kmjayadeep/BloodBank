@@ -1,5 +1,4 @@
 <!DOCTYPE html> 
-<html>
 <head>
 	<title>Blood Blank</title>
 	<meta charset="utf-8">
@@ -10,60 +9,56 @@
 	<style type="text/css">
 
 
-	.mybtn{
-		padding: 2em;
-	}
-
-
+		.mybtn{
+			padding: 2em;
+		}
 
 	</style>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.mobile-1.4.5.min.js"></script>
 </head>
-<body>
-
 <div data-role="page">
 
 
-<div data-role="header" style="overflow:hidden;">
-<h1>Blood Bank</h1>
-	<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
-    <a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
-   
-</div><!-- /header -->
+	<div data-role="header" style="overflow:hidden;">
+		<h1>Blood Bank</h1>
+		<a href="front.html" data-ajax="false" data-icon="home" class="ui-btn-left">Home</a>
+		<a href="login.html" data-ajax="false" data-icon="gear" class="ui-btn-right" id="btnLogin"></a>
+		
+	</div><!-- /header -->
 
 	<div role="main" class="ui-content" style="">
 
-<a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-a mybtn" data-transition="pop">Search Donors</a>
-<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+		<a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-a mybtn" data-transition="pop">Search Donors</a>
+		<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
 
-<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>    
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>    
 
-    <div style="padding:10px 20px;">
-            <h3>Search Donors</h3>
+			    <div style="padding:10px 20px;">
+				            <h3>Search Donors</h3>
 
-            <select name="user" id="sgroup" data-theme="a">
+				            <select name="user" id="sgroup" data-theme="a">
 
-				<option value="All">All</option>
-				<option value="A+">A+</option>
-				<option value="A-">A-</option>
-				<option value="B+">B+</option>
-				<option value="B-">B-</option>
-				<option value="O+">O+</option>
-				<option value="O-">O-</option>
-				<option value="AB+">AB+</option>
-				<option value="AB_">AB-</option>
-			</select>
+					<option value="All">All</option>
+					<option value="A+">A+</option>
+					<option value="A-">A-</option>
+					<option value="B+">B+</option>
+					<option value="B-">B-</option>
+					<option value="O+">O+</option>
+					<option value="O-">O-</option>
+					<option value="AB+">AB+</option>
+					<option value="AB_">AB-</option>
+				</select>
 
 
-            <input type="number" name="pass" id="ipin" value="" placeholder="Pincode" data-theme="a">
-            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-search" onclick="search()">Search</button>
-        </div>
-</div>
+				            <input type="number" name="pass" id="ipin" value="" placeholder="Pincode" data-theme="a">
+				            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-search" onclick="search()">Search</button>
+			        </div>
+		</div>
 
-<a href="profile.html" data-ajax="false" id="btprofile" class="ui-btn ui-btn-a mybtn">Profile</a>
-<a href="about.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">About</a>
+		<a href="profile.html" data-ajax="false" id="btprofile" class="ui-btn ui-btn-a mybtn">Profile</a>
+		<a href="about.html" data-ajax="false" class="ui-btn ui-btn-a mybtn">About</a>
 
 
 	</div><!-- /content -->
@@ -72,7 +67,7 @@
 
 
 <script>
-		
+	
 	if(!localStorage.loggedIn){
 		$('#btnLogin').html('Login');
 		$('#btprofile').hide();
@@ -85,17 +80,11 @@
 	function search(){
 		group = $('#sgroup').val();
 		pin = $('#ipin').val();
-        if(pin=="")
-        	pin="All";
+		if(pin=="")
+			pin="All";
 		localStorage.searchGroup = group;
 		localStorage.searchPin = pin;
 		window.location = 'search.html';
 	}
 
 </script>
-
-
-</body>
-
-
-</html>
