@@ -99,19 +99,19 @@
 				console.log("1");
 				$.post(server+'viewprofile.php',{'email':email, 'password':pass},function(data,status){
 					spinner.hide();
-					if(status==success)
+					if(status=='success')
 					{
-				console.log("2");
+						data=$.parseJSON(data);
 
 						if(data['success']==0)
 							showError("Please Login");
-					else{
-						bloodgroup=data['donor_info']['bloodgroup'];
-						if(bloodgroup!=null)
-							window.location="viewprofile.html";
+						else{
+							bloodgroup=data['donor_info']['bloodgroup'];
+							if(bloodgroup!=null)
+								window.location="viewprofile.html";
+						}
 					}
-				}
-			});
+				});
 			}
 
 			function create(){
