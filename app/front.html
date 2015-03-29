@@ -38,9 +38,8 @@
 			    <div style="padding:10px 20px;">
 				            <h3>Search Donors</h3>
 
-				            <select name="user" id="sgroup" data-theme="a">
-
-					<option value="All">All</option>
+				<select name="user" id="sgroup" data-theme="a">
+					<option value="All">Select BloodGroup</option>
 					<option value="A+">A+</option>
 					<option value="A-">A-</option>
 					<option value="B+">B+</option>
@@ -51,8 +50,20 @@
 					<option value="AB_">AB-</option>
 				</select>
 
+				<select name="user" id="sbranch" data-theme="a">
+					<option value="All">Select Branch</option>
+					<option value="Applied Electronics">Applied Electronics and Instrumentation</option>
+					<option value="Architecture">Architecture</option>
+					<option value="Business Administration">Business Administration</option>
+					<option value="Civil Engineering">Civil Engineering</option>
+					<option value="Computer Applications">Computer Applications</option>
+					<option value="Computer science">Computer science and Engineering</option>
+					<option value="Electrical Engineering">Electrical Engineering</option>
+					<option value="Electronics And Communication">Electronics And Communication Engineering</option>
+					<option value="Industrial Engineering">Industrial Engineering</option>
+					<option value="Mechanical Engineering">Mechanical Engineering</option>
+				</select>
 
-				            <input type="text" name="pass" id="ipin" value="" placeholder="branch" data-theme="a">
 				            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-search" onclick="search()">Search</button>
 			        </div>
 		</div>
@@ -79,11 +90,11 @@
 
 	function search(){
 		group = $('#sgroup').val();
-		pin = $('#ipin').val();
-		if(pin=="")
-			pin="All";
+		branch = $('#sbranch').val();
+		if(branch=="")
+			branch="All";
 		localStorage.searchGroup = group;
-		localStorage.searchPin = pin;
+		localStorage.searchBranch = branch;
 		window.location = 'search.html';
 	}
 
