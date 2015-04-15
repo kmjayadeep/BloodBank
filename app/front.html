@@ -47,7 +47,7 @@
 					<option value="O+">O+</option>
 					<option value="O-">O-</option>
 					<option value="AB+">AB+</option>
-					<option value="AB_">AB-</option>
+					<option value="AB-">AB-</option>
 				</select>
 
 				<select name="user" id="sbranch" data-theme="a">
@@ -62,6 +62,14 @@
 					<option value="Electronics And Communication">Electronics And Communication Engineering</option>
 					<option value="Industrial Engineering">Industrial Engineering</option>
 					<option value="Mechanical Engineering">Mechanical Engineering</option>
+				</select>
+
+				<select name="user" id="syear" data-theme="a">
+					<option value="All">Select Year</option>
+					<option value="1">First Year</option>
+					<option value="2">Second Year</option>
+					<option value="3">Third Year</option>
+					<option value="4">Fourth Year</option>
 				</select>
 
 				            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-search" onclick="search()">Search</button>
@@ -91,10 +99,12 @@
 	function search(){
 		group = $('#sgroup').val();
 		branch = $('#sbranch').val();
+		year = $('#syear').val();
 		if(branch=="")
 			branch="All";
 		localStorage.searchGroup = group;
 		localStorage.searchBranch = branch;
+		localStorage.searchYear = year;
 		window.location = 'search.html';
 	}
 

@@ -95,9 +95,10 @@
 		}
 
 		sgroup = localStorage.searchGroup;
-		spin = localStorage.searchBranch;
+		sbranch = localStorage.searchBranch;
+		syear=localStorage.searchYear;
 
-		$.post(server+'listdonors.php',{'bloodgroup':sgroup,'branch':spin},function(data,status){
+		$.post(server+'listdonors.php',{'bloodgroup':sgroup,'branch':sbranch,'year':syear},function(data,status){
 				spinner.hide();
 				if(status=='success'){
 					data = $.parseJSON(data);
