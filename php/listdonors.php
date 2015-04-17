@@ -10,23 +10,8 @@ if (isset($_REQUEST['bloodgroup'])) {
 }
 if (isset($_REQUEST['branch'])) {
 	$branch = $_REQUEST['branch'];
-<<<<<<< HEAD
 	if (!($branch == "All")) {
 		$mode = $mode + 2;
-=======
-	$mode = $mode + 2;
-}
-if (isset($_REQUEST['year'])) {
-	$year = $_REQUEST['year'];
-	$mode = $mode + 4;
-}
-
-//this is temporary code, to incorporate all option in bloodgroup and branch
-$newmode = 0;
-if ($mode == 1 || $mode == 3) {
-	if (!($bloodgroup == "All")) {
-		$newmode = $newmode + 1;
->>>>>>> d927d1962be4aa2c72588b5f2c36559dfe8ec7dd
 	}
 }
 
@@ -37,7 +22,6 @@ if (isset($_REQUEST['year'])) {
 		$mode = $mode + 4;
 }
 
-<<<<<<< HEAD
 //this is temporary code, to incorporate all option in bloodgroup and branch
 $newmode = $mode;
 // if ($mode == 1 || $mode == 3||$mode==5||$mode==7) {
@@ -55,12 +39,6 @@ $newmode = $mode;
 // if($mode>=4){
 // 	$newmode=newmode+4;
 // }
-=======
-if(!($year == "All"))
-{
-	$newmode = $newmode +4;
-}
->>>>>>> d927d1962be4aa2c72588b5f2c36559dfe8ec7dd
 
 $mode = $newmode;
 include "db_details.php";
@@ -84,7 +62,6 @@ if ($db_found) {
 	} elseif ($mode == 2) {
 		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '%$branch%'";
 	} elseif ($mode == 3) {
-<<<<<<< HEAD
 		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '%$branch%' and bloodgroup LIKE '$bloodgroup%'";
 	} elseif ($mode == 4) {
 		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE year='$year' and bloodgroup is not null";
@@ -95,18 +72,6 @@ if ($db_found) {
 	} elseif ($mode == 7) {
 		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE year='$year' and branch LIKE '%$branch%' and bloodgroup LIKE '$bloodgroup%'";
 	} 
-=======
-		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '$branch' and bloodgroup LIKE '$bloodgroup%'";
-	} elseif ($mode == 4) {
-		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE year==$calcyear";
-	} elseif ($mode == 5) {
-		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE bloodgroup LIKE '$bloodgroup%' and  year==$calcyear";
-	} elseif ($mode == 6) {
-		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '$branch' and  year==$calcyear";
-	} elseif ($mode == 7) {
-		$SQL = "SELECT name,email,bloodgroup,branch,mobile,year FROM $tablename WHERE branch LIKE '$branch' and bloodgroup LIKE '$bloodgroup%' and year==$calcyear";
-	}
->>>>>>> d927d1962be4aa2c72588b5f2c36559dfe8ec7dd
 
 	$result = mysql_query($SQL) or die($json['error'] = mysql_error());
 	$num_rows = mysql_num_rows($result);
@@ -120,12 +85,7 @@ if ($db_found) {
 } else {
 	$json['error'] = "Database not found";
 }
-<<<<<<< HEAD
 shuffle($json['donor_info']);
-=======
-shuffle($json('donor_info'));
-
->>>>>>> d927d1962be4aa2c72588b5f2c36559dfe8ec7dd
 $json['donor_info'] = array_slice($json['donor_info'], 0, $length);
 shuffle($json['donor_info']);
 echo json_encode($json);
