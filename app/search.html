@@ -94,9 +94,15 @@
 
 		sgroup = localStorage.searchGroup;
 		sbranch = localStorage.searchBranch;
+<<<<<<< HEAD
 		syear = localStorage.searchYear;
 
 		$.post(server+'listdonors.php',{'bloodgroup':sgroup,'branch':sbranch, 'year':syear},function(data,status){
+=======
+		syear=localStorage.searchYear;
+
+		$.post(server+'listdonors.php',{'bloodgroup':sgroup,'branch':sbranch,'year':syear},function(data,status){
+>>>>>>> d927d1962be4aa2c72588b5f2c36559dfe8ec7dd
 				spinner.hide();
 				if(status=='success'){
 					data = $.parseJSON(data);
