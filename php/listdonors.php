@@ -89,4 +89,4 @@ shuffle($json['donor_info']);
 $json['donor_info'] = array_slice($json['donor_info'], 0, $length);
 shuffle($json['donor_info']);
 echo json_encode($json);
-mysql_close($db_handle);
+($db_handle);
